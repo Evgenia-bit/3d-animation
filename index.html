@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper-main-banner {
+            width: 100%;
+            height: 40vw; 
+            background: url('images/bg.jpg') top center no-repeat;
+            background-size: contain;
+            
+            
+            perspective: 1000px;
+           
+        }
+        .main-banner-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            transform-style: preserve-3d;
+        }
+        .main-banner-container .block {
+            position: relative;
+        }
+        .main-banner-container .block img {
+            position: absolute;
+        }
+        .airpods {
+            top: 7vw;
+            left: 3vw;
+            width: 21vw;
+            transform: translateZ(10px)
+        }
+        .green-apple-left {
+            top: 20vw;
+            left: 13vw;
+            width: 11vw;
+            transform: translateZ(-30px)
+        }
+        .wholesale-online-store {
+            top: 6vw;
+            width: 50vw;
+            left: 5vw;
+            transform: translateZ(-100px)
+        }
+        .red-rectangle {
+            top: 10vw;
+            width: 60vw;
+            transform: translateZ(-50px)
+        }
+        .margin-goods {
+            top: 13vw;
+            width: 50vw;
+            left: 5vw;
+            transform: translateZ(70px)
+        }
+        .show-profit {
+            top: 21vw;
+            width: 38vw;
+            left: 11vw;
+            transform: translateZ(-70px)
+        }
+        .apple-green-right {
+            top: 17vw;
+            width: 11vw;
+            left: 6vw;
+            transform: translateZ(-30px)
+        }
+        .airpod {
+            top: 22vw;
+            width: 7vw;
+            left: -5vw;
+            transform: translateZ(30px)
+        }
+    </style>
+</head>
+<body>
+    <section class="wrapper-main-banner">
+            <div class="main-banner-container">
+                <div class="left-block block">
+                    <img src="images/airpods.png" alt="airpods" class="airpods">
+                    <img src="images/green-apple-left.png" alt="green apple" class="green-apple-left">
+                </div>
+                <div class="middle-block block">
+                    <img src="images/wholesale-online-store.png" alt="wholesale-online-store" class="wholesale-online-store">
+                    <img src="images/red-rectangle.png" alt="red-rectangle" class="red-rectangle">
+                    <img src="images/margin-goods.png" alt="margin-goods" class="margin-goods">
+                    <img src="images/show-profit.png" alt="show-profit" class="show-profit">
+                </div>
+                <div class="right-block block">
+                    <img src="images/apple-green-right.png" alt="apple-green-right" class="apple-green-right">
+                    <img src="images/airpod.png" alt="airpod" class="airpod">
+                    
+                </div>
+            </div>
+    </section>
+    <script>
+
+// After update OptimizedHTML5
+let cx, cy, mouseX, mouseY, posX, posY, clientX, clientY, dx, dy, tiltx, tilty, request, radius, degree
+
+document.addEventListener('DOMContentLoaded', () => {
+
+	// Custom JS
+
+const body = document.querySelector('body')
+
+	cx = window.innerWidth / 2
+	cy = window.innerHeight / 2
+
+	body.addEventListener('mousemove', e => {
+
+		clientX = e.pageX
+		clientY = e.pageY
+
+		request = requestAnimationFrame(updateMe)
+
+	})
+
+	function updateMe() {
+
+		dx     = clientX - cx
+		dy     = clientY - cy
+		tiltx  = dy / cy
+		tilty  = dx / cx
+		radius = Math.sqrt(Math.pow(tiltx, 2) + Math.pow(tilty, 2))
+		degree = radius * 12
+		gsap.to('.main-banner-container', 1, { transform: `rotate3d( ${tiltx}, ${tilty}, 0, ${degree}deg )` })
+
+	}
+	
+})
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+</body>
+</html>
